@@ -1,5 +1,6 @@
 package com.example;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ProdutoPerecivel extends Produto{
     private static final double DESCONTO = 0.25; // 25% de desconto
@@ -36,5 +37,12 @@ public class ProdutoPerecivel extends Produto{
     public String toString(){
         return super.toString() + " | Validade" + dataDeValidade;
     }
-}
 
+    @Override
+    public String gerarDadosTexto() {
+        // 2; descrição;preçoDeCusto;margemDeLucro;dataDeValidade
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return String.format("2;%s;%.2f;%.2f;%s", 
+            this.descricao, this.precoCusto, this.margemLucro, this.dataDeValidade.format(formatter));
+    }
+}
