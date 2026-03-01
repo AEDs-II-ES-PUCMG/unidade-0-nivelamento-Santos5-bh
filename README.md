@@ -6,3 +6,10 @@ Atividade de revisão e nivelamento da disciplina de AEDs II, abordando programa
 ## Aluno
 
 * Nome completo do aluno
+
+* Caso de erro ao tentar compilar direto de main rodar esses comando no terminal:
+
+cd "c:\Users\gabri\unidade-0-nivelamento-Santos5-bh\oficina\src\main\java\com\example\"
+javac *.java
+cd ..\..
+java com.example.Main
