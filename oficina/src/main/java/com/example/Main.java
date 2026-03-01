@@ -26,7 +26,7 @@ public class Main {
 
     static void cabecalho() {
         System.out.println("\n+===========================================+");
-        System.out.println("|           COMÉRCIO DE COISINHAS           |");
+        System.out.println("|           MERCADO BRANCO DO BIEL           |");
         System.out.println("+===========================================+");
     }
 
