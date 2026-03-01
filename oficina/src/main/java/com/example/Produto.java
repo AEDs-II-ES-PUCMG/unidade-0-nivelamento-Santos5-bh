@@ -1,4 +1,4 @@
-package main.java;
+package com.example;
 import java.text.NumberFormat;
 
 public class Produto {
