@@ -1,11 +1,11 @@
 package com.example;
 public class ProdutoNaoPerecivel extends Produto {
-    public ProdutoNaoPerecivel(String descricao, double precoCusto, double margemLucro) {
-        super(descricao, precoCusto, margemLucro);
+    public ProdutoNaoPerecivel(String descricao, double precoCusto, double margemLucro, double quantidadeEmEstoque) {
+        super(descricao, precoCusto, margemLucro, quantidadeEmEstoque);
     }
 
-    public ProdutoNaoPerecivel(String descricao, double precoCusto) {
-        super(descricao, precoCusto);
+    public ProdutoNaoPerecivel(String descricao, double precoCusto, double quantidadeEmEstoque) {
+        super(descricao, precoCusto, quantidadeEmEstoque);
     }
 
     
@@ -19,6 +19,6 @@ public class ProdutoNaoPerecivel extends Produto {
         // 1; descrição;preçoDeCusto;margemDeLucro
         // Usamos String.format com Locale.US ou replace para garantir consistência.
         return String.format("1;%s;%.2f;%.2f", 
-            this.descricao, this.precoCusto, this.margemLucro);
+            this.descricao, this.precoCusto, this.margemLucro, this.quantidadeEmEstoque);
     }
 }

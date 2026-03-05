@@ -10,6 +10,7 @@ public abstract class Produto {
 	protected String descricao;
 	protected double precoCusto;
 	protected double margemLucro;
+	protected double quantidadeEmEstoque;
 
 	/**
 	 * Inicializador privado. Os valores default, em caso de erro, são:
@@ -18,13 +19,15 @@ public abstract class Produto {
 	 * @param desc        Descrição do produto (mínimo de 3 caracteres)
 	 * @param precoCusto  Preço do produto (mínimo 0.01)
 	 * @param margemLucro Margem de lucro (mínimo 0.01)
+	 * @param quantidadeEmEstoque Quantos produtos (minimo 1.0)
 	 */
-	private void init(String desc, double precoCusto, double margemLucro) {
+	private void init(String desc, double precoCusto, double margemLucro, double quantidadeEmEstoque) {
 
 		if ((desc.length() >= 3) && (precoCusto > 0.0) && (margemLucro > 0.0)) {
 			descricao = desc;
 			this.precoCusto = precoCusto;
 			this.margemLucro = margemLucro;
+			this.quantidadeEmEstoque = quantidadeEmEstoque;
 		} else {
 			throw new IllegalArgumentException("Valores inválidos para os dados do produto.");
 		}
@@ -37,9 +40,10 @@ public abstract class Produto {
 	 * @param desc        Descrição do produto (mínimo de 3 caracteres)
 	 * @param precoCusto  Preço do produto (mínimo 0.01)
 	 * @param margemLucro Margem de lucro (mínimo 0.01)
+	 * @param quantidadeEmEstoque Quantos produtos (minimo 1.0)
 	 */
-	public Produto(String desc, double precoCusto, double margemLucro) {
-		init(desc, precoCusto, margemLucro);
+	public Produto(String desc, double precoCusto, double margemLucro, double quantidadeEmEstoque) {
+		init(desc, precoCusto, margemLucro, quantidadeEmEstoque);
 	}
 
 	/**
@@ -51,8 +55,8 @@ public abstract class Produto {
 	 * @param desc       Descrição do produto (mínimo de 3 caracteres)
 	 * @param precoCusto Preço do produto (mínimo 0.01)
 	 */
-	public Produto(String desc, double precoCusto) {
-		init(desc, precoCusto, MARGEM_PADRAO);
+	public Produto(String desc, double precoCusto, double quantidadeEmEstoque) {
+		init(desc, precoCusto, MARGEM_PADRAO, quantidadeEmEstoque);
 	}
 
 	/**
@@ -111,16 +115,17 @@ public abstract class Produto {
 		String descricao = dados[1].trim();
 		double precoCusto = Double.parseDouble(dados[2].trim().replace(",", "."));
 		double margemLucro = Double.parseDouble(dados[3].trim().replace(",", "."));
+		double quantidadeEmEstoque = Double.parseDouble(dados[4].trim().replace(",", "."));
 
 		Produto novoProduto = null;
 
 		if (tipo == 1) {
-			novoProduto = new ProdutoNaoPerecivel(descricao, precoCusto, margemLucro);
+			novoProduto = new ProdutoNaoPerecivel(descricao, precoCusto, margemLucro, quantidadeEmEstoque);
 		} else if (tipo == 2) {
 			// Formato esperado: dd/MM/yyyy
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-			LocalDate dataValidade = LocalDate.parse(dados[4].trim(), formatter);
-			novoProduto = new ProdutoPerecivel(descricao, precoCusto, margemLucro, dataValidade);
+			LocalDate dataValidade = LocalDate.parse(dados[5].trim(), formatter);
+			novoProduto = new ProdutoPerecivel(descricao, precoCusto, margemLucro, dataValidade, quantidadeEmEstoque);
 		} else {
 			throw new IllegalArgumentException("Tipo de produto inválido no arquivo de dados.");
 		}

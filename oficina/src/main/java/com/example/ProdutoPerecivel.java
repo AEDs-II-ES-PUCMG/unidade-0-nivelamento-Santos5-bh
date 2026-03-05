@@ -7,8 +7,8 @@ public class ProdutoPerecivel extends Produto{
     private static final int PRAZO_DESCONTO = 7; // 7 Dias
     private final LocalDate dataDeValidade;
 
-    public ProdutoPerecivel(String descricao, double precoCusto, double margemLucro, LocalDate dataDeValidade) {
-        super(descricao, precoCusto, margemLucro);
+    public ProdutoPerecivel(String descricao, double precoCusto, double margemLucro, LocalDate dataDeValidade, double quantidadeEmEstoque) {
+        super(descricao, precoCusto, margemLucro, quantidadeEmEstoque);
 
         // Verificação se a data de validade é posterior a data atual
         if (dataDeValidade.isBefore(LocalDate.now())) {
@@ -43,6 +43,6 @@ public class ProdutoPerecivel extends Produto{
         // 2; descrição;preçoDeCusto;margemDeLucro;dataDeValidade
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return String.format("2;%s;%.2f;%.2f;%s", 
-            this.descricao, this.precoCusto, this.margemLucro, this.dataDeValidade.format(formatter));
+            this.descricao, this.quantidadeEmEstoque, this.precoCusto, this.margemLucro, this.dataDeValidade.format(formatter));
     }
 }
